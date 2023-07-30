@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="section portfolio-section gray-bg" id="work">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 text-center">
+                    <div class="section-title">
+                        <h2>Messages</h2>
+                    </div>
+                </div>
+            </div>
+            {% for masag in  Ask_masage%}
+
+                <div class="row justify-content-center">
+                    <div class="col-2">
+                        <h3>{{ masag.customer_name }}</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 style="    width: 100%;    word-break: break-all;">{{ masag.customer_email }}</h3>
+                    </div>
+                    <div class="col-2">
+                        <h3>{{ masag.subject }}</h3>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center ">
+                        <h3>{{ masag.message }}</h3>
+                    </div>
+                </div>
+                <br>
+                <br>
+            {% endfor %}
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-lg-7 text-center">
+                    <div class="section-title">
+                        <h2>Portfolio</h2>
+                    </div>
+                </div>
+            </div>
+            {% for portfolios_images in  portfolio_images %}
+                <div class="row justify-content-center">
+                    <div class="col-4 ">
+                        <img src="/static{{ portfolios_images.image.url }}">
+                    </div>
+                    <div class="col-2 ">
+                        <h3>{{ portfolios_images.name }}</h3>
+                    </div>
+                    <div class="col-4 ">
+                        <h3>{{ portfolios_images.description }}</h3>
+                    </div>
+                    <div class="col-1">
+                        <a class="delete-item" href="{% url 'delete_portf' portfolios_images.id  %}">Delete</a>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-lg-7 text-center">
+                    <div class="section-title">
+                        <h2>Order</h2>
+                    </div>
+                </div>
+            </div>
+            {% for order in  orders %}
+                <div class="row justify-content-center">
+
+                    <div class="col-2 ">
+                        <a class="delete-item" href="{% url 'confirm_order' order.id  %}">confirm</a>
+                    </div>
+                    <div class="col-2 ">
+                        <h3 style="    width: 100%;    word-break: break-all;">{{ order.order.customer_name }}</h3>
+                    </div>
+                    <div class="col-2 ">
+                        <h3 style="    width: 100%;    word-break: break-all;">{{ order.order.customer_phone }}</h3>
+                    </div>
+                    <div class="col-2 ">
+                        <h3 style="    width: 100%;    word-break: break-all;">{{ order.product.name }}</h3>
+                    </div>
+                    <div class="col-1">
+                        <a class="delete-item" href="{% url 'delete_order' order.id  %}">Delete</a>
+                    </div>
+                    <div class="col-3 ">
+                        {% if  order.order.status  == False %}
+                            <h3 style="    width: 100%;    word-break: break-all;">Not confirmed</h3>
+                        {% elif order.order.status  == True%}
+                            <h3 style="    width: 100%;    word-break: break-all;">confirmed</h3>
+                        {% endif %}
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-lg-7 text-center">
+                    <div class="section-title">
+                        <h2>Add to Portfolio</h2>
+                    </div>
+                </div>
+            </div>
+
+            <form method = "post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

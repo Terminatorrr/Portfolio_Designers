@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Contact Us -->
+    <div id="loading">
+        <div class="load-circle"><span class="one"></span></div>
+    </div>
+    <section class="section" id="contactus">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 text-center">
+                    <div class="section-title">
+                        <h2>Get In Touch</h2>
+                        <p>with me for further cooperation</p>
+                    </div>
+                </div>
+            </div>
+            <form action="" method="post" >{% csrf_token %}
+                <div class="row flex-row-reverse">
+                    <div class="col-md-7 col-lg-8 m-15px-tb">
+                        <div class="contact-form">
+                            <form id="contact-form" method="POST">
+                                <div class="row gy-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input name="{{ form.name.html_name }}" id="name" placeholder="Name *" class="form-control" type="text" value="{{ request.POST.name }}">
+                                            <span class="input-focus-effect theme-bg"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input name="{{ form.email.html_name }}" id="email" placeholder="Email *" class="form-control" type="email" value="{{ request.POST.email }}">
+                                            <span class="input-focus-effect theme-bg"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input name="{{ form.subject.html_name }}" id="subject" placeholder="Subject *" class="form-control" type="text" value="{{ request.POST.subject }}">
+                                            <span class="input-focus-effect theme-bg"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea name="{{ form.message.html_name }}" id="message" placeholder="Your message *" rows="3" class="form-control" value="{{ request.POST.message }}"></textarea>
+                                            <span class="input-focus-effect theme-bg"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="send">
+                                            <button class="px-btn theme" type="submit"><span>Contact Us</span></button>
+                                        </div>
+                                        <span id="suce_message" class="text-success" style="display: none">Message Sent Successfully</span>
+                                        <span id="err_message" class="text-danger" style="display: none">Message Sending Failed</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-4 m-15px-tb">
+                        <div class="contact-info">
+                            <div class="contact-name">
+                                <h5>Mail</h5>
+                                <p>katyushapetrenko@email.ua</p>
+                            </div>
+                            <div class="contact-name">
+                                <h5>Visit My Studio</h5>
+                                <p>Kovpaka 45 <br>Sumy, Ukraine</p>
+                            </div>
+                            <div class="contact-name">
+                                <h5>Phone</h5>
+                                <p>+38(099) 5332 865</p>
+                            </div>
+                            <div class="social-share nav">
+                                <a class="dribbble" href="#">
+                                    <i class="fab fa-dribbble"></i>
+                                </a>
+                                <a class="behance" href="#">
+                                    <i class="fab fa-behance"></i>
+                                </a>
+                                <a class="linkedin" href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- End Contact Us -->
+{% endblock %}

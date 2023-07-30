@@ -1,0 +1,7 @@
+{
+  "threshold": 20,
+  "reporters": ["html", "console", "javascript"],
+  "ignore": ["**/__snapshots__/**", "venv", ".idea" ],
+  "absolute": true,
+  "output": "reports/jscpd"
+}

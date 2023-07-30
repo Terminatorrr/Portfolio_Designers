@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <!-- Services -->
+    <div id="loading">
+        <div class="load-circle"><span class="one"></span></div>
+    </div>
+    <section class="section services-section gray-bg" id="services">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 text-center">
+                    <div class="section-title">
+                        <h2>Order</h2>
+                    </div>
+                </div>
+            </div>
+        {% if products_in_basket %}
+
+            <form action="" method="post" >{% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input name="{{ form.name.html_name }}" id="name" placeholder="Name *" class="form-control" type="text" value="{{ request.POST.name }}">
+                            <span class="input-focus-effect theme-bg"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input name="{{ form.phone.html_name }}" id="phone" placeholder="Phone *" class="form-control" type="text" value="{{ request.POST.phone }}">
+                            <span class="input-focus-effect theme-bg"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input name="{{ form.adress.html_name }}" id="subject" placeholder="Adress *" class="form-control" type="text" value="{{ request.POST.adress }}">
+                            <span class="input-focus-effect theme-bg"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <textarea name="{{ form.coments.html_name }}" id="message" placeholder="Comments *" rows="3" class="form-control" value="{{ request.POST.coments }}"></textarea>
+                            <span class="input-focus-effect theme-bg"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="basket-item" class="basket-item table-wrap">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <th>Name of Product:</th>
+                            <th>Price per item:</th>
+                            <th>Сoments:</th>
+                            <th>Delete:</th>
+                        </thead>
+                        <tbody>
+                            {% for product_in_basket in products_in_basket %}
+                                <tr>
+                                    <td>{{ product_in_basket.product.name }}   </td>
+                                    <td><input placeholder="Comments *" type="text" class="product-in-basket-nmb" name="product_in_basket_{{ product_in_basket.id }}"></td>
+                                    <td><span class="product-price" name="product_in_basket_{{ product_in_basket.id }}">{{ product_in_basket.price_per_item }}</span></td>
+                                    <td><a class="delete-item" href="{% url 'delete_adding' product_in_basket.id  %}" data-product_id="{{ product_in_basket.id }} ">x</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="send">
+                            <button class="px-btn theme" type="submit">
+                                <span>Order</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+        </div>
+    </section>
+<!-- End Services -->
+
+
+{% endblock %}

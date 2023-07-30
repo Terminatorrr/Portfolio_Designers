@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Portfolio -->
+    <div id="loading">
+        <div class="load-circle"><span class="one"></span></div>
+    </div>
+    <section class="section portfolio-section gray-bg" id="work">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 text-center">
+                    <div class="section-title">
+                        <h2>Latest Work</h2>
+                        <p>Works that include graphic elements to demonstrate skills in working with various programs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-content grid-gutter-lg grid-col-3 lightbox-gallery">
+                {% for portfolios_image in portfolio_images%}
+                    <div class="grid-item product branding">
+                        <div class="portfolio-box-01">
+                            <div class="portfolio-info">
+                                <h3>{{portfolios_image.name}}</h3>
+                                <br>
+                                <h4>{{portfolios_image.description}}</h4>
+                            </div>
+                            <div class="portfolio-img">
+                                <img class="w-100" src="/static{{portfolios_image.image.url}}" title="" alt="">
+                                <div class="portfolio-icon d-flex align-items-end">
+
+                                    <a href="/static{{portfolios_image.image.url}}" class="px-btn-arrow white gallery-link">
+                                        <span>View</span>
+                                        <i class="arrow"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}<!-- grid item -->
+            </div> <!-- portfolio-content -->
+        </div>
+    </section>
+<!-- End Portfolio -->
+
+
+{% endblock %}
